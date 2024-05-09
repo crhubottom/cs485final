@@ -1,11 +1,12 @@
 class Boid {
-  constructor() {
+  constructor(img1) {
     this.position = createVector(random(width), random(height));
     this.velocity = p5.Vector.random2D();
     this.velocity.setMag(random(2, 4));
     this.acceleration = createVector();
     this.maxForce = 0.2;
     this.maxSpeed = 5;
+    this.img = img1;
   }
 
   edges() {
@@ -121,14 +122,6 @@ class Boid {
   }
 
   show() {
-    strokeWeight(6);
-
-    stroke(
-      Math.floor(Math.random() * 255),
-      Math.floor(Math.random() * 255),
-      Math.floor(Math.random() * 255)
-    );
-
-    point(this.position.x, this.position.y);
+    image(this.img, this.position.x, this.position.y, 30, 30);
   }
 }

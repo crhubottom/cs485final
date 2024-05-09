@@ -18,6 +18,11 @@ var color_map = new Image();
 var reset = false;
 sprites_to_draw[0] = new Array(0); //background and
 sprites_to_draw[1] = new Array(0); //forground
+let img1;
+
+function preload() {
+  img1 = loadImage("imgs/snowball.png");
+}
 function setup() {
   createCanvas(1920, 1080);
   alignSlider = createSlider(0, 2, 1.5, 0.1);
@@ -27,7 +32,7 @@ function setup() {
   separationSlider = createSlider(0, 2, 2, 0.1);
   separationSlider.position(10, 70);
   for (let i = 0; i < 300; i++) {
-    flock.push(new Boid());
+    flock.push(new Boid(img1));
   }
 }
 $.getJSON("Penguins/animationData.json", function (data) {
@@ -74,7 +79,13 @@ function draw_loop() {
 
   const context = canvas.getContext("2d");
   //context.clearRect(0, 0, canvas.width, canvas.height);
-
+  clear();
+  for (let boid of flock) {
+    boid.edges();
+    boid.flock(flock);
+    boid.update();
+    boid.show();
+  }
   //Draw background sprites
   for (var i = 0; i < background_length; i++) {
     has_background_changed = sprites_to_draw[0][i].draw();
@@ -86,13 +97,6 @@ function draw_loop() {
       has_background_changed: has_background_changed,
       key_change: false,
     });
-    clear();
-    for (let boid of flock) {
-      boid.edges();
-      boid.flock(flock);
-      boid.update();
-      boid.show();
-    }
   }
   requestAnimationFrame(draw_loop);
 }

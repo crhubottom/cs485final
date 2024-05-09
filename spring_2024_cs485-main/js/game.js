@@ -7,7 +7,9 @@ const w = 87;
 const s = 83;
 const a = 65;
 const d = 68;
+const flock = [];
 const canvas = document.querySelector("canvas");
+
 const offscreen = new OffscreenCanvas(256, 256);
 const sprites_to_draw = new Array(2);
 var draw_loop_timeout;
@@ -16,7 +18,18 @@ var color_map = new Image();
 var reset = false;
 sprites_to_draw[0] = new Array(0); //background and
 sprites_to_draw[1] = new Array(0); //forground
-
+function setup() {
+  createCanvas(1920, 1080);
+  alignSlider = createSlider(0, 2, 1.5, 0.1);
+  alignSlider.position(10, 10);
+  cohesionSlider = createSlider(0, 2, 1, 0.1);
+  cohesionSlider.position(10, 40);
+  separationSlider = createSlider(0, 2, 2, 0.1);
+  separationSlider.position(10, 70);
+  for (let i = 0; i < 300; i++) {
+    flock.push(new Boid());
+  }
+}
 $.getJSON("Penguins/animationData.json", function (data) {
   //sprites_to_draw[1].push( new Sprite(data, 0 ,0, "idleSpin") );
   //sprites_to_draw[1].push( new Sprite(data, 100 ,100, "idleWave") );
@@ -73,6 +86,13 @@ function draw_loop() {
       has_background_changed: has_background_changed,
       key_change: false,
     });
+    clear();
+    for (let boid of flock) {
+      boid.edges();
+      boid.flock(flock);
+      boid.update();
+      boid.show();
+    }
   }
   requestAnimationFrame(draw_loop);
 }

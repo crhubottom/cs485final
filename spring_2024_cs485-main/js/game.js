@@ -43,10 +43,10 @@ $.getJSON("Penguins/animationData.json", function (data) {
   //sprites_to_draw[1].push( new Sprite(data, 100 ,100, "idleWave") );
   //sprites_to_draw[1].push(new Sprite(data, 150, 650, "idle"));
 
-  sprite = new Sprite(data, 400, 300, "idle");
+  sprite = new Sprite(data, 400, 300, "idle", "red");
   sprites_to_draw[1].push(sprite);
 
-  sprite_wasd = new Sprite(data, 150, 300, "idle");
+  sprite_wasd = new Sprite(data, 150, 300, "idle", "teal");
   sprites_to_draw[1].push(sprite_wasd);
 });
 

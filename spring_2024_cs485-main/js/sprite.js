@@ -52,13 +52,13 @@ class BackgroundSprite {
 
 //Parent Sprit Classa
 class Sprite {
-  constructor(sprite_json, x, y, start_state) {
+  constructor(sprite_json, x, y, start_state, color) {
     this.sprite_json = sprite_json;
     this.x = x;
     this.y = y;
     this.state = start_state;
     this.root_e = "TenderBud";
-
+    this.color = color;
     this.cur_frame = 0;
 
     this.cur_bk_data = null;
@@ -104,6 +104,39 @@ class Sprite {
       this.x,
       this.y
     );
+    if (this.state == "walk_N") {
+      ctx.beginPath();
+      ctx.arc(this.x + 85, this.y - 35, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = this.color;
+      ctx.stroke();
+    } else if (this.state == "walk_S") {
+      ctx.beginPath();
+      ctx.arc(this.x + 85, this.y - 35, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = this.color;
+      ctx.stroke();
+    } else if (this.state == "walk_E") {
+      ctx.beginPath();
+      ctx.arc(this.x + 60, this.y - 35, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = this.color;
+      ctx.stroke();
+    } else {
+      ctx.beginPath();
+      ctx.arc(this.x + 85, this.y - 35, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = this.color;
+      ctx.stroke();
+    }
 
     this.cur_frame = this.cur_frame + 1;
     if (this.cur_frame >= this.sprite_json[this.root_e][this.state].length) {

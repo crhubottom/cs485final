@@ -10,6 +10,7 @@ const d_key = 68;
 const space = 32;
 var p1 = 0;
 var p2 = 0;
+var boidCount = 300;
 const flock = [];
 const canvas = document.querySelector("canvas");
 
@@ -27,7 +28,7 @@ function preload() {
   img1 = loadImage("imgs/snowball.png");
 }
 function setup() {
-  createCanvas(1920, 1080);
+  c = createCanvas(1920, 1080);
   alignSlider = createSlider(0, 2, 1.5, 0.1);
   alignSlider.position(10, 10);
   cohesionSlider = createSlider(0, 2, 1, 0.1);

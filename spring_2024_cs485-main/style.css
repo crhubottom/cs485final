@@ -45,3 +45,18 @@ body {
 #p2 {
   color: teal;
 }
+#winner {
+  display: none;
+  position: absolute;
+  color: white;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  font-size: 50px;
+}
+#winText {
+  position: relative;
+  font-size: 50px;
+  top: 40%;
+  left: 43%;
+}

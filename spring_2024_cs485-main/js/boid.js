@@ -129,6 +129,7 @@ class Boid {
     ) {
       this.showBoid = false;
       p1++;
+      boidCount--;
       $("#p1").html("Player 1: " + p1);
     }
     if (
@@ -140,7 +141,34 @@ class Boid {
     ) {
       this.showBoid = false;
       p2++;
+      boidCount--;
       $("#p2").html("Player 2: " + p2);
+    }
+    if (boidCount == 0) {
+      if (p1 > p2) {
+        $("#winText").html("Player 1 Wins!");
+      } else if (p2 > p1) {
+        $("#winText").html("Player 2 Wins!");
+      } else {
+        $("#winText").html("It's a tie!");
+      }
+      $("#winner").show();
+      $("#scoreboard").hide();
+      $("#mycanvas").hide();
+      c.hide();
+    }
+    if (p1 + boidCount < p2) {
+      $("#winText").html("Player 2 Wins by Majority!");
+      $("#winner").show();
+      $("#scoreboard").hide();
+      $("#mycanvas").hide();
+      c.hide();
+    } else if (p2 + boidCount < p1) {
+      $("#winText").html("Player 1 Wins by Majority!");
+      $("#winner").show();
+      $("#scoreboard").hide();
+      $("#mycanvas").hide();
+      c.hide();
     }
   }
 

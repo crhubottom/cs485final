@@ -8,6 +8,8 @@ const a_key = 65;
 const s_key = 83;
 const d_key = 68;
 const space = 32;
+var p1 = 0;
+var p2 = 0;
 const flock = [];
 const canvas = document.querySelector("canvas");
 
@@ -40,10 +42,10 @@ $.getJSON("Penguins/animationData.json", function (data) {
   //sprites_to_draw[1].push( new Sprite(data, 0 ,0, "idleSpin") );
   //sprites_to_draw[1].push( new Sprite(data, 100 ,100, "idleWave") );
   //sprites_to_draw[1].push(new Sprite(data, 150, 650, "idle"));
-  
+
   sprite = new Sprite(data, 400, 300, "idle");
   sprites_to_draw[1].push(sprite);
-        
+
   sprite_wasd = new Sprite(data, 150, 300, "idle");
   sprites_to_draw[1].push(sprite_wasd);
 });
@@ -108,28 +110,27 @@ function draw_loop() {
 
   for (var i = 1; i < forground_length; i++) {
     if (
-        sprites_to_draw[1][0].y <= sprites_to_draw[1][i].y + 200 &&
-        sprites_to_draw[1][0].y >= sprites_to_draw[1][i].y &&
-        sprites_to_draw[1][0].x + 150 <= sprites_to_draw[1][i].x + 200 &&
-        sprites_to_draw[1][0].x + 150 >= sprites_to_draw[1][i].x
+      sprites_to_draw[1][0].x < sprites_to_draw[1][1].x + 110 &&
+      sprites_to_draw[1][0].x + 110 > sprites_to_draw[1][1].x &&
+      sprites_to_draw[1][0].y < sprites_to_draw[1][1].y + 135 &&
+      sprites_to_draw[1][0].y + 135 > sprites_to_draw[1][1].y
     ) {
-        //alert("Game Over");
-        //sprites_to_draw[1][0].y = (sprites_to_draw[1][i].y + 90) +100
-        //sprites_to_draw[1][0].y = (sprites_to_draw[1][i].y) + 51
-        //sprites_to_draw[1][0].x  = (sprites_to_draw[1][i].x + 10) +100
-        //sprites_to_draw[1][0].x = (sprites_to_draw[1][i].x) +31
+      //alert("Game Over");
+      //sprites_to_draw[1][0].y = (sprites_to_draw[1][i].y + 90) +100
+      //sprites_to_draw[1][0].y = (sprites_to_draw[1][i].y) + 51
+      //sprites_to_draw[1][0].x  = (sprites_to_draw[1][i].x + 10) +100
+      //sprites_to_draw[1][0].x = (sprites_to_draw[1][i].x) +31
 
-        sprite_wasd.state = "idleSpin";
-        sprite_wasd.x_v = 0
-        sprite_wasd.y_v = 0
+      sprite_wasd.state = "idleSpin";
+      sprite_wasd.x_v = 0;
+      sprite_wasd.y_v = 0;
 
-        sprite.state = "idleSpin";
-        sprite.x_v = 0
-        sprite.y_v = 0
-        sprite.x = prites_to_draw[1][i].x + 100
+      sprite.state = "idleSpin";
+      sprite.x_v = 0;
+      sprite.y_v = 0;
+      sprite.x = prites_to_draw[1][i].x + 100;
     }
-
-}
+  }
   requestAnimationFrame(draw_loop);
 }
 function changeBk(background) {
@@ -161,8 +162,6 @@ function changeBk(background) {
 
           break;
       }
-
-      
     });
 
     console.log(background);
@@ -231,76 +230,71 @@ document.body.onkeydown = function (e) {
   
 };*/
 
-
-document.body.onkeydown = function(e) {
-
+document.body.onkeydown = function (e) {
   // Update sprite's state based on arrow key pressed
   if (e.keyCode == up_arrow) {
-      sprite.state = "walk_N";
-      sprite.y_v = -10
-      sprite.x_v = 0
-      sprite.cur_frame = 0;
-      //e.preventDefault();
+    sprite.state = "walk_N";
+    sprite.y_v = -10;
+    sprite.x_v = 0;
+    sprite.cur_frame = 0;
+    //e.preventDefault();
   }
   if (e.keyCode == down_arrow) {
-      sprite.state = "walk_S";
-      sprite.y_v = 10
-      sprite.x_v = 0
-      sprite.cur_frame = 0;
+    sprite.state = "walk_S";
+    sprite.y_v = 10;
+    sprite.x_v = 0;
+    sprite.cur_frame = 0;
   }
   if (e.keyCode == right_arrow) {
-      sprite.state = "walk_E";
-      sprite.x_v = 10
-      sprite.y_v = 0
-      sprite.cur_frame = 0;
+    sprite.state = "walk_E";
+    sprite.x_v = 10;
+    sprite.y_v = 0;
+    sprite.cur_frame = 0;
   }
   if (e.keyCode == left_arrow) {
-      sprite.state = "walk_W";
-      sprite.x_v = -10
-      sprite.y_v = 0
-      sprite.cur_frame = 0;
+    sprite.state = "walk_W";
+    sprite.x_v = -10;
+    sprite.y_v = 0;
+    sprite.cur_frame = 0;
   }
-  if (e.keyCode == enter_key){
-      sprite.state = "idleWave";
-      sprite.x_v = 0
-      sprite.y_v = 0
-      sprite.cur_frame = 0;
-
+  if (e.keyCode == enter_key) {
+    sprite.state = "idleWave";
+    sprite.x_v = 0;
+    sprite.y_v = 0;
+    sprite.cur_frame = 0;
   }
 
   //second sprite movement
   if (e.keyCode == w_key) {
-      sprite_wasd.state = "walk_N";
-      sprite_wasd.y_v = -10
-      sprite_wasd.x_v = 0
-      sprite_wasd.cur_frame = 0;
-      //e.preventDefault();
+    sprite_wasd.state = "walk_N";
+    sprite_wasd.y_v = -10;
+    sprite_wasd.x_v = 0;
+    sprite_wasd.cur_frame = 0;
+    //e.preventDefault();
   }
   if (e.keyCode == s_key) {
-      sprite_wasd.state = "walk_S";
-      sprite_wasd.y_v = 10
-      sprite_wasd.x_v = 0
-      sprite_wasd.cur_frame = 0;
+    sprite_wasd.state = "walk_S";
+    sprite_wasd.y_v = 10;
+    sprite_wasd.x_v = 0;
+    sprite_wasd.cur_frame = 0;
   }
   if (e.keyCode == d_key) {
-      sprite_wasd.state = "walk_E";
-      sprite_wasd.x_v = 10
-      sprite_wasd.y_v = 0
-      sprite_wasd.cur_frame = 0;
+    sprite_wasd.state = "walk_E";
+    sprite_wasd.x_v = 10;
+    sprite_wasd.y_v = 0;
+    sprite_wasd.cur_frame = 0;
   }
   if (e.keyCode == a_key) {
-      sprite_wasd.state = "walk_W";
-      sprite_wasd.x_v = -10
-      sprite_wasd.y_v = 0
-      sprite_wasd.cur_frame = 0;
+    sprite_wasd.state = "walk_W";
+    sprite_wasd.x_v = -10;
+    sprite_wasd.y_v = 0;
+    sprite_wasd.cur_frame = 0;
   }
-  if (e.keyCode == space){
-
-      sprite_wasd.state = "idleWave";
-      sprite_wasd.x_v = 0
-      sprite_wasd.y_v = 0
-      sprite_wasd.cur_frame = 0;
-
+  if (e.keyCode == space) {
+    sprite_wasd.state = "idleWave";
+    sprite_wasd.x_v = 0;
+    sprite_wasd.y_v = 0;
+    sprite_wasd.cur_frame = 0;
   }
 };
 

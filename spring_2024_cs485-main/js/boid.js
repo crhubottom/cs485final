@@ -7,6 +7,7 @@ class Boid {
     this.maxForce = 0.2;
     this.maxSpeed = 5;
     this.img = img1;
+    this.showBoid = true;
   }
 
   edges() {
@@ -119,9 +120,33 @@ class Boid {
     this.velocity.add(this.acceleration);
     this.velocity.limit(this.maxSpeed);
     this.acceleration.mult(0);
+    if (
+      sprites_to_draw[1][0].x < this.position.x + 30 &&
+      sprites_to_draw[1][0].x + 110 > this.position.x &&
+      sprites_to_draw[1][0].y < this.position.y + 30 &&
+      sprites_to_draw[1][0].y + 135 > this.position.y &&
+      this.showBoid == true
+    ) {
+      this.showBoid = false;
+      p1++;
+      $("#p1").html("Player 1: " + p1);
+    }
+    if (
+      sprites_to_draw[1][1].x < this.position.x + 30 &&
+      sprites_to_draw[1][1].x + 110 > this.position.x &&
+      sprites_to_draw[1][1].y < this.position.y + 30 &&
+      sprites_to_draw[1][1].y + 135 > this.position.y &&
+      this.showBoid == true
+    ) {
+      this.showBoid = false;
+      p2++;
+      $("#p2").html("Player 2: " + p2);
+    }
   }
 
   show() {
-    image(this.img, this.position.x, this.position.y, 30, 30);
+    if (this.showBoid == true) {
+      image(this.img, this.position.x, this.position.y, 30, 30);
+    }
   }
 }
